@@ -3,6 +3,8 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "stack": "cpp",
-        "atomic": "cpp"
+        "atomic": "cpp",
+        "utility": "cpp",
+        "xutility": "cpp"
     }
 }
