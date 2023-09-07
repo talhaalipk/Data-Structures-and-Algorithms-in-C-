@@ -14,7 +14,7 @@ void printIntArray(int array[], int size)
 
 void mergeArray(int realArr[], int start, int mid, int end)
 {
-    int array1_Lenght = mid - start  + 1;
+    int array1_Lenght = mid - start + 1;
     int array2_Lenght = end - mid;
 
     int *arr1 = new int[array1_Lenght];
@@ -49,15 +49,15 @@ void mergeArray(int realArr[], int start, int mid, int end)
         {
             realArr[k++] = arr2[j++];
         }
+    }
 
-        while (i < array1_Lenght)
-        {
-            realArr[k++] = arr1[i++];
-        }
-        while (j < array2_Lenght)
-        {
-            realArr[k++] = arr2[j++];
-        }
+    while (i < array1_Lenght)
+    {
+        realArr[k++] = arr1[i++];
+    }
+    while (j < array2_Lenght)
+    {
+        realArr[k++] = arr2[j++];
     }
 
     delete[] arr1;
@@ -72,7 +72,7 @@ void mergeSort(int arr[], int start, int end)
         return;
     }
 
-    int mid = start + ((end - start)/ 2);
+    int mid = start + ((end - start) / 2);
 
     // left side recursion call
     mergeSort(arr, start, mid);
@@ -85,8 +85,9 @@ void mergeSort(int arr[], int start, int end)
 
 int main()
 {
-    const int size = 5;
+    const int size = 5 /* 5 */;
 
+    // int arr[size] = {3, 7, 0, 1, 5, 8, 3, 2, 34, 66, 87, 23, 12, 12, 12};
     int arr[size] = {5, 3, 2, 6, 4};
 
     printIntArray(arr, size);
