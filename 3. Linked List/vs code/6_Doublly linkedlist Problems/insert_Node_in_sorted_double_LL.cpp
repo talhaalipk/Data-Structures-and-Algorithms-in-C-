@@ -199,9 +199,41 @@ void printLinkList(Node *&head)
 }
 
 // =========================== //
+// ===insert In Sorted List=== //
+// =========================== //
+
+void insertNode_inSortendlist(Node *&head, Node *&tail, int value)
+{
+    Node *temp = head;
+
+    // AGAR Value 1 Par ane ho
+    if (value < temp->data)
+    {
+        insertAtHead(head, value);
+        return;
+    }
+
+    int count = 1;
+    while (temp != NULL && !(value < temp->data))
+    {
+        count++;
+        temp = temp->next;
+    }
+
+    // AGAR KOI BE VALUE US SA zada nhi ha
+    if (temp == NULL)
+    {
+        insertAtTail(tail, value);
+        return;
+    }
+
+    // Ager koi darman ma ha
+    insertAtAnyPostion(head, tail, count, value);
+    return;
+}
+
 // =========================== //
 // ======Mian Function======== //
-// =========================== //
 // =========================== //
 
 int main()
@@ -211,64 +243,21 @@ int main()
     Node *tail = NULL;
     printLinkList(head);
     // Creating first Node and assign the address to *head pointer
-    head = new Node(10);
+    head = new Node(90);
     tail = head;
 
-    insertAtHead(head, 20);
-    printLinkList(head);
-
-    insertAtHead(head, 30);
-    printLinkList(head);
-
+    insertAtHead(head, 60);
+    insertAtHead(head, 50);
     insertAtHead(head, 40);
+    insertAtHead(head, 30);
+    insertAtHead(head, 10);
     printLinkList(head);
 
-    // Insert at tail
-    insertAtTail(tail, 20);
+    insertNode_inSortendlist(head,tail,15);
+    insertNode_inSortendlist(head,tail,35);
+    insertNode_inSortendlist(head,tail,45);
+    insertNode_inSortendlist(head,tail,55);
+    insertNode_inSortendlist(head,tail,70);
+    insertNode_inSortendlist(head,tail,520);
     printLinkList(head);
-
-    insertAtTail(tail, 30);
-    printLinkList(head);
-
-    insertAtTail(tail, 40);
-    printLinkList(head);
-
-    // Intert at any position;
-    // Intert at any position;
-
-    /*Insert at first*/
-    insertAtAnyPostion(head, tail, 1, 90);
-    printLinkList(head);
-
-    /*Insert at Last*/
-    insertAtAnyPostion(head, tail, lenghtofLinkList(head) + 1, 90);
-    printLinkList(head);
-
-    /*Insert in between*/
-    insertAtAnyPostion(head, tail, 5, 0);
-    printLinkList(head);
-
-    insertAtAnyPostion(head, tail, 5, 10);
-    printLinkList(head);
-
-    // Delete any Postion
-    // Delete any Postion
-
-    /*Delete First*/
-    DeleteAnyPostion(head, tail, 1);
-    printLinkList(head);
-
-    /*Delete lAST*/
-    DeleteAnyPostion(head, tail, lenghtofLinkList(head));
-    printLinkList(head);
-
-    /*Delete In b/w*/
-    // cout << "Head : " << head-> data << endl ;
-    // cout << "Tail : " << tail->pervious -> data << endl ;
-    // cout << "5 data and address " << head->next->next->next->next << " : " << head->next->next->next->next->data << endl;
-    DeleteAnyPostion(head, tail, 5);
-    printLinkList(head);
-    // cout << "5 data and address " << head->next->next->next->next << " : " << head->next->next->next->next->data << endl;
-
 }
-

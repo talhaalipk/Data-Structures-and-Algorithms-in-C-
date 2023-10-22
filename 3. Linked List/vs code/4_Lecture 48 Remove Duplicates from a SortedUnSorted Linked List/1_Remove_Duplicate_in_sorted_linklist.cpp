@@ -176,7 +176,7 @@ void removeDuplicateInSortedLinklist(Node *&head)
     Node *temp = head;
     Node *clear; // for remove data
 
-    while (temp != NULL  )
+    while (temp != NULL && temp->next != NULL )
     {
         if (temp->data == (temp->next)->data)
         {
@@ -228,38 +228,7 @@ int main()
     head = new Node(1);
     tail = head;
 
-    insertAtTail(tail, 3);
-    printLinkList(head);
 
-    insertAtTail(tail, 3);
-    printLinkList(head);
-
-    insertAtTail(tail, 5);
-    printLinkList(head);
-
-    // Insert at tail
-    insertAtTail(tail, 5);
-    printLinkList(head);
-
-    insertAtTail(tail, 5);
-    printLinkList(head);
-
-    insertAtTail(tail, 5);
-    printLinkList(head);
-
-    insertAtTail(tail, 5);
-    printLinkList(head);
-
-    insertAtTail(tail, 5);
-    printLinkList(head);
-
-    insertAtTail(tail, 9);
-    printLinkList(head);
-
-    insertAtTail(tail, 9);
-    printLinkList(head);
-
-    insertAtTail(tail, 9);
     printLinkList(head);
 
     cout << endl
