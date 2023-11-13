@@ -45,7 +45,7 @@ void addInBinarySearchTree(Node *&root, int data)
 
 // - Create Simple Avl Tree -
 // - Create Simple Avl Tree -
-void createSimpleSearchTree(Node *&root)
+void createBinarySearchTree(Node *&root)
 {
     cout << "Enter how many Values you want to ADD : ";
     int num;
@@ -60,6 +60,132 @@ void createSimpleSearchTree(Node *&root)
 
         addInBinarySearchTree(root, value);
     }
+}
+
+// - Search-value in BST -
+// - Search-value in BST -
+bool searchInBST(Node *root, int searchValue)
+{
+    Node *temp = root;
+    bool returnValue = false;
+
+    while (temp != NULL)
+    {
+        // AGAR MAL GYE
+        if (temp->data == searchValue)
+        {
+            returnValue = true;
+            break;
+        }
+
+        if (searchValue < temp->data)
+        {
+            temp = temp->left;
+        }
+        else
+        {
+            temp = temp->right;
+        }
+    }
+
+    return returnValue;
+}
+
+// - Get Min in BST -
+// - Get Min in BST -
+Node *getMinInBST(Node *root)
+{
+    if (root == NULL)
+    {
+        return NULL;
+    }
+
+    Node *temp = root;
+    while (temp->left != NULL)
+    {
+        temp = temp->left;
+    }
+    return temp;
+}
+
+// - Get Max in BST -
+// - Get Max in BST -
+Node *getMaxInBST(Node *root)
+{
+    if (root == NULL)
+    {
+        return NULL;
+    }
+
+    Node *temp = root;
+    while (temp->right != NULL)
+    {
+        temp = temp->right;
+    }
+    return temp;
+}
+
+// - Delection in BST -
+// - Delection in BST -
+Node *deleteInBST(Node *root, int del_value)
+{
+    // Agar nhi male
+    if (root == NULL)
+    {
+        return root;
+    }
+
+    // Agar delete wale node pa aa gye ha
+    else if (root->data == del_value)
+    {
+        // 0 child
+        // Agar koi child nhi ha leaf node ha
+        if (root->left == NULL && root->right == NULL)
+        {
+            delete root;
+            return NULL;
+        }
+
+        // 1 child AK child
+
+        // left childe ha
+        if (root->left != NULL && root->right == NULL)
+        {
+            Node *temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // right child ha
+        if (root->left == NULL && root->right != NULL)
+        {
+            Node *temp = root->right;
+            delete root;
+            return temp;
+        }
+
+        // ASAL masla
+        //  2 child
+        if (root->left != NULL && root->right != NULL)
+        {
+            int min = getMinInBST(root->right) -> data;
+            root->data = min;
+
+            root-> right = deleteInBST(root->right, min);
+            return root;
+        }
+    }
+
+    else if (del_value < root->data)
+    {
+        root->left = deleteInBST(root->left, del_value);
+    }
+    else
+    {
+        root->right = deleteInBST(root->right, del_value);
+    }
+
+    return root;
 }
 
 // - Print Tree -
@@ -114,6 +240,8 @@ void printTree(Node *root)
     }
 }
 
+// - In-order Treversal -
+// - In-order Treversal -
 void inOrderTraversal(Node *&root)
 {
     if (root == NULL)
@@ -131,12 +259,24 @@ int main()
     Node *root = NULL;
 
     // Test Input
-    // 10 90 27 56 98 75 23 21 1 8 9 
-    createSimpleSearchTree(root);
+    // 10 90 27 56 98 75 23 21 1 8 9
+    createBinarySearchTree(root);
     cout << endl;
 
-    printTree(root);
+    cout << "   - Inorder -" << endl;
+    inOrderTraversal(root);
 
-    cout << endl << "   - Inorder -" << endl <<endl ;
+    int search = 90;
+
+    // cout << endl
+    //      << "Searching " << search << " BST Bool return : " << searchInBST(root, search) << endl;
+
+    cout << endl << endl
+         << "deleting value =  " << search << endl;
+
+    root = deleteInBST(root,search);
+
+    cout << endl
+         << "   - Inorder -" << endl;
     inOrderTraversal(root);
 }
